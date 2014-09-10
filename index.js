@@ -9,7 +9,7 @@ exports.register = function(server, cache, methods){
         args.push(_.last(arguments))
         methods[v].apply(this, args);
       }, {
-      cache: cache.server,
+      cache: cache,
       generateKey: function() {
         return JSON.stringify(_.take(arguments, arguments.length-2));
       }
