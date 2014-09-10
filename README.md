@@ -17,14 +17,12 @@ var config = {
 };
 
 var methods = {
-  add: function(a, b, request, next){
-    // when the server method itself is called, we can log the cache-miss
-    request.log(["cachemiss"], { method: "add" });
+  add: function(a, b, next){
     next(null, a+b);
   }
 };
 
-methods.register(server, config, methods); 
+methods.register(server, config, methods);
 
 server.route({
     method: 'GET',
