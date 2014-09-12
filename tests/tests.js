@@ -49,7 +49,8 @@ describe('tests', function(){
 
   it('should log the key and args when invoked', function(){
     ms[0].c.generateKey(2, 2, request, function(err, res){});
-    serverlogs[0].key.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
-    serverlogs[0].args.should.eql([2, 2]);
+    var bits = serverlogs[0].split(" => ");
+    bits[1].should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
+    bits[0].should.eql(JSON.stringify([2, 2]));
   });
 });
