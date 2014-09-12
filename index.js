@@ -4,11 +4,18 @@ var _ = require('underscore'),
 exports.register = function(server, cache, methods){
   Object.keys(methods)
   .forEach(function(v){
-    server.method(v, function(){
-        arguments[arguments.length-2].log(["cachemiss"], { method: v });
+    var method = methods[v];
+    if(!method || (typeof method !== "function") ||  method.length < 2){
+      throw new Error("arguments list did not match (arg1, .... argN, callback)");
+    }
+    
+    server.method(v, function(){ /* (arg1, ...., argN, request, callback) */
+        var request = arguments[arguments.length-2];
+        request.log(["cachemiss"], { method: v }); 
+
         var args = _.take(arguments, arguments.length-2);
-        args.push(_.last(arguments))
-        methods[v].apply(this, args);
+        args.push(_.last(arguments));
+        method.apply(this, args);
       }, {
       cache: cache,
       generateKey: function() {

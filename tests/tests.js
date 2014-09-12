@@ -31,6 +31,14 @@ describe('tests', function(){
 
     ms.length.should.eql(1);
   });
+  
+  it('should throw an error when the method signature is invalid', function(){
+    helper.register.bind(null, server, cache, { myMethod: function(){} }).should.throw();
+  });
+
+  it('should throw an error when given something that isn\'t a function', function(){
+    helper.register.bind(null, server, cache, { myMethod: 'blarg' }).should.throw();
+  });
 
   it('should log a cachemiss', function(){
     ms[0].m(2, 2, request, function(err, res){
