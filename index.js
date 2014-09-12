@@ -1,4 +1,5 @@
-var _ = require('underscore');
+var _ = require('underscore'),
+    sha = require("sha-1");
 
 exports.register = function(server, cache, methods){
   Object.keys(methods)
@@ -11,7 +12,7 @@ exports.register = function(server, cache, methods){
       }, {
       cache: cache,
       generateKey: function() {
-        return JSON.stringify(_.take(arguments, arguments.length-2));
+        return sha(_.take(arguments, arguments.length-2));
       }
     });
   });
