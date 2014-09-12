@@ -34,7 +34,7 @@ describe('tests', function(){
     });
   });
 
-  it('should log a cachemiss', function(){
+  it('should include the method name on the log', function(){
     logs[0].method.should.eql('myMethod');
   });
 });
