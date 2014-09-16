@@ -19,10 +19,8 @@ exports.register = function(server, cache, methods){
       }, {
       cache: cache,
       generateKey: function() {
-        var request = arguments[arguments.length-2];
         var args = _.take(arguments, arguments.length-2);
         var key = sha(JSON.stringify(args));
-        request.log(["key-generate"], { args: args, key: key });
 
         return key;
       }

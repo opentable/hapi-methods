@@ -51,10 +51,4 @@ describe('tests', function(){
     var result = ms[0].c.generateKey(2, 2, request, function(err, res){});
     result.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
   });
-
-  it('should log the key and args when generating cache key', function(){
-    ms[0].c.generateKey(2, 2, request, function(err, res){});
-    logs[1].key.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
-    logs[1].args.should.eql([2, 2]);
-  });
 });
