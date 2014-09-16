@@ -11,9 +11,6 @@ describe('tests', function(){
   var server = {
     method: function(n, m, c){
       ms.push({ m: m, c: c });
-    },
-    log: function(t, v){
-      serverlogs.push(v);
     }
   },
   request = {
@@ -31,7 +28,7 @@ describe('tests', function(){
 
     ms.length.should.eql(1);
   });
-  
+
   it('should throw an error when the method signature is invalid', function(){
     helper.register.bind(null, server, cache, { myMethod: function(){} }).should.throw();
   });
@@ -55,10 +52,9 @@ describe('tests', function(){
     result.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
   });
 
-  it('should log the key and args when invoked', function(){
+  it('should log the key and args when generating cache key', function(){
     ms[0].c.generateKey(2, 2, request, function(err, res){});
-    var bits = serverlogs[0].split(" => ");
-    bits[1].should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
-    bits[0].should.eql(JSON.stringify([2, 2]));
+    logs[1].key.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
+    logs[1].args.should.eql([2, 2]);
   });
 });

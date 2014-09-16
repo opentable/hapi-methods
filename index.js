@@ -8,10 +8,10 @@ exports.register = function(server, cache, methods){
     if(!method || (typeof method !== "function") ||  method.length < 2){
       throw new Error("arguments list did not match (arg1, .... argN, callback)");
     }
-    
+
     server.method(v, function(){ /* (arg1, ...., argN, request, callback) */
         var request = arguments[arguments.length-2];
-        request.log(["cachemiss"], { method: v }); 
+        request.log(["cachemiss"], { method: v });
 
         var args = _.take(arguments, arguments.length-2);
         args.push(_.last(arguments));
@@ -19,9 +19,11 @@ exports.register = function(server, cache, methods){
       }, {
       cache: cache,
       generateKey: function() {
+        var request = arguments[arguments.length-2];
         var args = _.take(arguments, arguments.length-2);
         var key = sha(JSON.stringify(args));
-        server.log(["key-generate"], JSON.stringify(args) + " => " + key);
+        request.log(["key-generate"], { args: args, key: key });
+
         return key;
       }
     });
