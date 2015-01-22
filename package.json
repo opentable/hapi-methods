@@ -1,6 +1,6 @@
 {
   "name": "hapi-methods",
-  "version": "2.1.2",
+  "version": "3.0.0",
   "description": "server method helper",
   "main": "index.js",
   "scripts": {
@@ -30,5 +30,8 @@
   "dependencies": {
     "sha1": "^1.1.0",
     "underscore": "^1.6.0"
+  },
+  "peerDependencies": {
+    "hapi": "^8.0.0"
   }
 }

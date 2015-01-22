@@ -48,7 +48,7 @@ describe('tests', function(){
   });
 
   it('should register the generateKey function', function(){
-    var result = ms[0].c.generateKey(2, 2, request, function(err, res){});
+    var result = ms[0].c.generateKey(2, 2, request);
     result.should.eql('251a8ad2b3294251a16936bf66f9bc747b5e9fb3');
   });
 });
